@@ -56,12 +56,16 @@ public class HardwareClassTutorial {
         frontLeft = hwMap.dcMotor.get("front_left");
         backRight = hwMap.dcMotor.get("back_right");
         backLeft = hwMap.dcMotor.get("back_left");
+        oneEightyServo = hwMap.servo.get("180_servo");
+        conRotationServo = hwMap.crservo.get("continuous_servo");
 
         //set default motor power to 0... so it doesn't drive away when no one's touching it
         frontRight = setPower(0);
         frontLeft = setPower(0);
         backRight = setPower(0);
         backLeft = setPower(0);
+        oneEightyServo = null;
+        conRotationServo = null;
 
         /* Set all motors to run without an encoder. If they are on, they record how many rotations
         the wheel is doing, which you generally don't need it to do unless you're using it for autonomous.
