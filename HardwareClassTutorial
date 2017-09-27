@@ -1,0 +1,77 @@
+package org.firstinspires.ftc.teamcode;
+
+/**
+ * Created by Phoebe on 9/20/2017.
+ * put your name "created by" slot above so the team this year and next year will know who wrote it and
+ * who to ask for help if they need the program/need to modify it. Follow with a very brief description
+ * of your program so another programmer can understand it even after you graduate.
+ *
+ * This comment will usually not be this long... anyway, this program will be a sample hardware class.
+ * It will use four standard motors in a linear drive and two servos, one CR, one 180 degrees, just to
+ * show you how to program each.
+ *
+ * The naming convention that we use is ClassNameHardware. For example, a holonomic drive train hardware class
+ * should be HolonomicHardware, with no spaces or underscores, just capitals for new words
+ */
+
+/** place import statements here */
+    //import this to enable you to map the motors. You will need the map for the configuration file
+    import com.qualcomm.robotcore.hardware.HardwareMap;
+    //import this to enable you to use functions from the DcMotor library
+    import com.qualcomm.robotcore.hardware.DcMotor;
+    //import this only if you are using a 180 degree rotation servo. It will allow you to use the Servo library
+    import com.qualcomm.robotcore.hardware.Servo;
+    //import this only if you are using a continuous rotation servo. It will allow you to use the CRServo library
+    //Cr stands for continuous rotation btw
+    import com.qualcomm.robotcore.hardware.CRServo;
+
+
+public class HardwareClassTutorial {
+
+    /** These are public OpMode members... which means declare each motor and servo as a variable
+     * DcMotor variables declare a motor, Servo means it is a 180 degree servo, and CRServo is a
+     * continuous rotation servo*/
+    public DcMotor frontRight;
+    public DcMotor backRight;
+    public DcMotor frontLeft;
+    public DcMotor backLeft = null; //setting any of these to null is preference, some people do, some don't
+    public Servo oneEightyServo = null; //it just makes the value = nothing
+    public CRServo conRotationServo;
+
+    /** create a hardware map to allow you to configure all the motors/servos in the config file */
+    HardwareMap hwMap = null;
+
+    /** just make an empty constructor... not that important */
+    public HardwareClassTutorial (){
+    }
+
+    /** this function will hold the main code for the hardware class */
+    public void init (HardwareMap ahwMap)
+    {
+        hwMap = ahwMap;
+
+        /* map each wheel or servo to the correct motor or servo variable. This will be the name of
+        that element in the configuration file */
+        frontRight = hwMap.dcMotor.get("front_right");
+        frontLeft = hwMap.dcMotor.get("front_left");
+        backRight = hwMap.dcMotor.get("back_right");
+        backLeft = hwMap.dcMotor.get("back_left");
+
+        //set default motor power to 0... so it doesn't drive away when no one's touching it
+        frontRight = setPower(0);
+        frontLeft = setPower(0);
+        backRight = setPower(0);
+        backLeft = setPower(0);
+
+        /* Set all motors to run without an encoder. If they are on, they record how many rotations
+        the wheel is doing, which you generally don't need it to do unless you're using it for autonomous.
+        If they're on, it'll just slow down the code because it will waste time storing the info */
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+    }
+
+
+}
