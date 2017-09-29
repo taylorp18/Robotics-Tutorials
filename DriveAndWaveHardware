@@ -1,0 +1,59 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
+
+/**
+ * Created by robotics on 9/5/2017.
+ */
+
+public class DriveAndWaveHardware {
+
+    /* Public OpMode members. */
+    public DcMotor frontRight;
+    public DcMotor backRight;
+    public DcMotor frontLeft;
+    public DcMotor backLeft;
+    public Servo gate = null;
+
+    /* Local OpMode members. */
+    HardwareMap hwMap  = null;
+
+    /* Constructor */
+    public DriveAndWaveHardware() {
+    }
+
+    public void init (HardwareMap ahwMap) {
+        hwMap = ahwMap;
+
+        /* map each wheel/motor */
+        frontRight = hwMap.dcMotor.get("front_right");
+        backRight = hwMap.dcMotor.get("back_right");
+        frontLeft = hwMap.dcMotor.get("front_left");
+        backLeft = hwMap.dcMotor.get("back_left");
+
+        // Define and initialize ALL installed servos.
+        gate = hwMap.servo.get("gate");
+
+        /* reverse left motors */
+        backLeft.setDirection(DcMotor.Direction.REVERSE);
+        frontLeft.setDirection(DcMotor.Direction.REVERSE);
+
+        /*set motor default power to 0 */
+        frontRight.setPower(0);
+        backRight.setPower(0);
+        frontLeft.setPower(0);
+        backLeft.setPower(0);
+
+        /* set all to run without encoder */
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+
+}
