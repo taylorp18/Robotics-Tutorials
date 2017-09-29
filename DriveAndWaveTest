@@ -1,0 +1,61 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+
+
+
+import org.firstinspires.ftc.teamcode.DriveAndWaveHardware;
+
+/**
+ * Created by Phoebe on 9/5/2017.
+ */
+
+@TeleOp(name="group_name: Drive_and_wave", group = "group_name")
+
+public class DriveAndWaveTest extends LinearOpMode {
+    DriveAndWaveHardware robot = new DriveAndWaveHardware();
+
+    public DriveAndWaveTest ()
+    {}
+
+    @Override
+    public void runOpMode ()
+    {
+        double left_y;
+        double right_y;
+
+        robot.init(hardwareMap);
+
+        waitForStart();
+
+        while (opModeIsActive())
+        {
+            left_y = -gamepad1.left_stick_y;
+            right_y = -gamepad1.right_stick_y;
+            robot.frontLeft.setPower(left_y);
+            robot.backLeft.setPower(left_y);
+            robot.frontRight.setPower(right_y);
+            robot.backRight.setPower(right_y);
+
+
+            while (gamepad1.right_bumper)
+            {
+                //wave
+                robot.gate.setPosition(0.9);
+                sleep(1000);
+                robot.gate.setPosition(0.1);
+            }
+            /* while (gamepad1.right_bumper)
+            {
+                //rotate counter-clockwise (i think)
+                robot.gate.setPosition(1.0);
+            }
+            */
+        }
+
+    }
+
+
+}
